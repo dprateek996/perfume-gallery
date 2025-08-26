@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;500;700&display=swap');
+
+:root {
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --color-primary: #1a1a1a;
+  --color-neutral: #fdfaf6;
+  --color-accent: #d4af37;
+  --color-text: #333333;
+  --color-background: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); color: var(--color-text); background-color: var(--color-background); line-height: 1.6; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; color: var(--color-primary); }
+a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+a:hover { color: var(--color-accent); }
+ul { list-style-type: none; }
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* --- NEW HOME PAGE STYLES --- */
+
+/* 1. New Hero Section */
+
+
+/* --- Auth Page Styles --- */
+.auth-container {
+  max-width: 450px;
+  margin: 4rem auto;
+  padding: 3rem;
+  border: 1px solid #eee;
+  background-color: #fff;
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+}
+
+.auth-form .form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #333;
+}
+
+.auth-switch-link {
+  margin-top: 1.5rem;
+  display: block;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: inherit;
+}
+.logout-button:hover {
+  color: var(--color-accent);
+}
+
+
+/* --- Cart Page Styles --- */
+.cart-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.cart-empty {
+  text-align: center;
+  padding: 4rem 0;
+}
+.cart-empty p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.cart-content {
+  display: flex;
+  gap: 2rem;
+}
+.cart-items {
+  flex: 3;
+}
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding: 1.5rem 0;
+}
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.cart-item-details {
+  flex-grow: 1;
+}
+.cart-item-details a {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.cart-item-details p {
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+.cart-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.cart-item-actions select {
+  padding: 0.3rem;
+}
+.btn-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  font-size: 1.1rem;
+}
+.btn-remove:hover {
+  color: #e74c3c;
+}
+.cart-summary {
+  flex: 1;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  height: fit-content;
+}
+.cart-summary h3 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+.btn-checkout {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.btn-primary { /* For the 'Continue Shopping' button */
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.8rem 2rem;
+}
+
+.cart-badge {
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* --- Home Page Split Section Styles --- */
+/* ===== NEW LUXURY HOME PAGE STYLES ===== */
+
+/* 1. New Hero Section */
+.hero-luxury {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  text-align: center;
+  padding: 0 2rem;
+  /* New, user-selected background image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+.hero-luxury h1 {
+  font-size: 4.5rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.hero-luxury p {
+  font-size: 1.3rem;
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+}
+/* Button for the new luxury hero section */
+.hero-luxury-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 1rem 3.5rem; /* Larger padding */
+  font-family: var(--font-body);
+  font-size: 1.1rem; /* Larger font size */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Add the hover effect for the new button */
+.hero-luxury-button:hover {
+  background-color: white;
+  color: var(--color-primary);
+}
+
+
+/* 2. General Section Styling */
+.content-section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.content-section .section-title {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+.content-section .section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* 3. Craftsmanship Section (Replaces 'Art of Attar') */
+.craftsmanship-section {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 5rem 2rem;
+  background-color: var(--color-neutral); /* Soft cream background */
+}
+.craftsmanship-section .text-content {
+  flex: 1;
+  text-align: left;
+}
+.craftsmanship-section .image-content {
+  flex: 1;
+}
+.craftsmanship-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .craftsmanship-section {
+    flex-direction: column;
+  }
+}
