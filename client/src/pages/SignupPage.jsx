@@ -41,95 +41,120 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="auth-page" style={{ paddingTop: '80px' }}>
+    <div className="min-h-screen bg-gradient-to-b from-surface to-cream flex items-center justify-center px-6 py-24">
       <motion.div 
-        className="auth-container"
-        initial={{ opacity: 0, y: 30 }}
+        className="w-full max-w-md bg-white p-8 md:p-10 rounded-2xl border border-border shadow-soft-lg"
+        initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
       >
-        <h2>Create Account</h2>
-        <p className="auth-subtitle">Join us for exclusive access to rare fragrances</p>
+        <div className="text-center mb-8">
+          <h1 className="font-heading text-3xl md:text-4xl font-normal text-ink tracking-tight mb-3">
+            Create Account
+          </h1>
+          <p className="text-charcoal">Join us for exclusive access to rare fragrances</p>
+        </div>
         
         {error && (
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            style={{ 
-              padding: '1rem', 
-              marginBottom: '1.5rem', 
-              background: '#fee2e2', 
-              color: '#dc2626',
-              borderRadius: 'var(--radius-md)',
-              fontSize: '0.9rem'
-            }}
+            className="p-4 mb-6 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm flex items-center gap-3"
           >
+            <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
             {error}
           </motion.div>
         )}
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="name">Full Name</label>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-ink mb-2">
+              Full Name
+            </label>
             <input 
               type="text" 
               id="name" 
               value={name} 
               onChange={(e) => setName(e.target.value)} 
               placeholder="Enter your full name"
-              required 
+              required
+              autoComplete="name"
+              className="input-field"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-ink mb-2">
+              Email Address
+            </label>
             <input 
               type="email" 
               id="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               placeholder="Enter your email"
-              required 
+              required
+              autoComplete="email"
+              className="input-field"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-ink mb-2">
+              Password
+            </label>
             <input 
               type="password" 
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               placeholder="Create a password"
-              required 
+              required
+              autoComplete="new-password"
+              className="input-field"
             />
           </div>
           <motion.button 
-            type="submit" 
-            className="auth-button" 
+            type="submit"
             disabled={loading}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            className={`w-full py-4 font-medium text-sm tracking-wide uppercase rounded-lg transition-all duration-300 ${
+              loading 
+                ? 'bg-sand/50 text-ink/50 cursor-not-allowed' 
+                : 'bg-ink text-white hover:bg-gold hover:shadow-soft-lg active:scale-[0.99]'
+            }`}
+            whileHover={!loading ? { scale: 1.01 } : {}}
+            whileTap={!loading ? { scale: 0.99 } : {}}
           >
-            {loading ? 'Creating Account...' : 'Create Account'}
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                </svg>
+                Creating Account...
+              </span>
+            ) : 'Create Account'}
           </motion.button>
         </form>
 
-        <p style={{ 
-          fontSize: '0.8rem', 
-          color: 'var(--text-muted)', 
-          textAlign: 'center', 
-          marginTop: 'var(--space-md)',
-          lineHeight: '1.6'
-        }}>
+        <p className="text-xs text-stone text-center mt-6 leading-relaxed">
           By creating an account, you agree to our Terms of Service and Privacy Policy.
         </p>
 
-        <div className="auth-divider">
-          <span>or</span>
+        <div className="flex items-center gap-4 my-8">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+          <span className="text-xs text-stone uppercase tracking-wider">or</span>
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
         </div>
 
-        <Link to="/login" className="auth-switch-link">
-          Already have an account? <strong style={{ color: 'var(--color-accent)' }}>Sign in</strong>
-        </Link>
+        <p className="text-center text-charcoal">
+          Already have an account?{' '}
+          <Link to="/login" className="text-gold font-medium hover:text-gold-dark transition-colors no-underline">
+            Sign in
+          </Link>
+        </p>
       </motion.div>
     </div>
   );

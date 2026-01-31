@@ -1,7 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
+import ShoppingCartIcon from '../ui/shopping-cart-icon';
+import UserIcon from '../ui/user-icon';
+import LogoutIcon from '../ui/logout-icon';
+import XIcon from '../ui/x-icon';
 
 const Navbar = () => {
   const { userInfo, logout } = useContext(AuthContext);
@@ -11,14 +16,13 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Check if we're on home page for transparent navbar
   const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -28,174 +32,214 @@ const Navbar = () => {
   };
 
   const cartItemCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
-
-  // Dynamic styles based on scroll and page
-  const headerStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1000,
-    padding: scrolled ? '0.875rem 2rem' : '1.25rem 2rem',
-    backgroundColor: scrolled || !isHomePage ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-    backdropFilter: scrolled || !isHomePage ? 'blur(16px)' : 'none',
-    borderBottom: scrolled || !isHomePage ? '1px solid var(--border)' : 'none',
-    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
-  };
-
-  const navStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    maxWidth: '1280px',
-    margin: '0 auto',
-  };
-
-  const logoStyle = {
-    fontFamily: 'var(--font-heading)',
-    textDecoration: 'none',
-    transition: 'opacity 0.3s ease',
-  };
-
-  const logoTextStyle = {
-    fontSize: '1.5rem',
-    fontWeight: '500',
-    letterSpacing: 'var(--tracking-tight)',
-    color: scrolled || !isHomePage ? 'var(--text-primary)' : 'var(--text-light)',
-    transition: 'color 0.2s ease',
-  };
-
-  const logoSubStyle = {
-    fontSize: '0.65rem',
-    fontWeight: '500',
-    letterSpacing: '0.3em',
-    textTransform: 'uppercase',
-    color: scrolled || !isHomePage ? 'var(--text-secondary)' : 'rgba(255, 255, 255, 0.7)',
-    marginTop: '-1px',
-    display: 'block',
-    transition: 'color 0.2s ease',
-  };
-
-  const navLinksStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '2.5rem',
-  };
-
-  const linkStyle = {
-    fontSize: '0.875rem',
-    fontWeight: '500',
-    letterSpacing: '0.01em',
-    color: scrolled || !isHomePage ? 'var(--text-primary)' : 'var(--text-light)',
-    textDecoration: 'none',
-    transition: 'color 0.2s ease',
-    position: 'relative',
-  };
-
-  const cartLinkStyle = {
-    ...linkStyle,
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-  };
-
-  const userGreetingStyle = {
-    fontSize: '0.8rem',
-    fontWeight: '500',
-    color: scrolled || !isHomePage ? 'var(--text-secondary)' : 'rgba(255, 255, 255, 0.9)',
-    padding: '0.5rem 1rem',
-    background: scrolled || !isHomePage ? 'var(--bg-muted)' : 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 'var(--radius-full)',
-    border: scrolled || !isHomePage ? '1px solid var(--border)' : '1px solid rgba(255, 255, 255, 0.2)',
-  };
+  const isTransparent = isHomePage && !scrolled;
 
   return (
-    <header style={headerStyle}>
-      <nav style={navStyle}>
-        <Link to="/" style={logoStyle}>
-          <div style={logoTextStyle}>Perfume Gallery</div>
-          <span style={logoSubStyle}>Artisan Fragrances</span>
+    <motion.header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isTransparent 
+          ? 'bg-transparent' 
+          : 'bg-white/90 backdrop-blur-xl border-b border-border/50 shadow-soft'
+      }`}
+      style={{ padding: scrolled ? '0.75rem 1.5rem' : '1rem 1.5rem' }}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <nav className="flex justify-between items-center max-w-7xl mx-auto">
+        {/* Logo */}
+        <Link to="/" className="group no-underline">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
+            <h1 
+              className={`font-heading text-2xl font-medium tracking-tight transition-colors duration-200 m-0 ${
+                isTransparent ? 'text-white' : 'text-ink'
+              }`}
+            >
+              Perfume Gallery
+            </h1>
+            <span 
+              className={`text-[0.65rem] font-medium tracking-[0.12em] uppercase block -mt-0.5 transition-colors duration-200 ${
+                isTransparent ? 'text-white/70' : 'text-stone'
+              }`}
+            >
+              Artisan Fragrances
+            </span>
+          </motion.div>
         </Link>
         
-        <ul style={navLinksStyle}>
-          <li>
-            <Link to="/shop" style={linkStyle}>
-              Shop
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" style={linkStyle}>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" style={linkStyle}>
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link to="/cart" style={cartLinkStyle}>
-              <svg 
-                width="20" 
-                height="20" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
+          {[
+            { to: '/shop', label: 'Shop' },
+            { to: '/about', label: 'About' },
+            { to: '/contact', label: 'Contact' },
+          ].map((link) => (
+            <li key={link.to}>
+              <Link 
+                to={link.to} 
+                className={`text-sm font-medium tracking-normal transition-all duration-200 no-underline relative group py-2 ${
+                  isTransparent ? 'text-white' : 'text-ink'
+                } ${location.pathname === link.to ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               >
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-              {cartItemCount > 0 && (
-                <span className="cart-badge">{cartItemCount}</span>
-              )}
+                {link.label}
+                <span className={`absolute -bottom-0.5 left-0 h-0.5 rounded-full transition-all duration-300 ${
+                  location.pathname === link.to ? 'w-full bg-gold' : 'w-0 group-hover:w-full'
+                } ${isTransparent ? 'bg-white' : 'bg-gold'}`}></span>
+              </Link>
+            </li>
+          ))}
+          
+          {/* Cart */}
+          <li>
+            <Link 
+              to="/cart" 
+              className={`relative flex items-center gap-2 transition-all duration-200 no-underline p-2 -m-2 rounded-lg hover:bg-white/10 ${
+                isTransparent ? 'text-white' : 'text-ink'
+              }`}
+              aria-label={`Cart with ${cartItemCount} items`}
+            >
+              <ShoppingCartIcon 
+                size={22} 
+                strokeWidth={1.5} 
+                color="currentColor"
+              />
+              <AnimatePresence>
+                {cartItemCount > 0 && (
+                  <motion.span 
+                    className="absolute -top-1 -right-1 text-[0.6rem] font-semibold px-1.5 py-0.5 rounded-full min-w-[18px] text-center bg-gold text-white shadow-soft"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    key={cartItemCount}
+                  >
+                    {cartItemCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </Link>
           </li>
+
+          {/* User Actions */}
           {userInfo ? (
             <>
               <li>
-                <span style={userGreetingStyle}>
-                  Hello, {userInfo.name.split(' ')[0]}
+                <span 
+                  className={`text-xs font-medium px-4 py-2 rounded-full transition-colors ${
+                    isTransparent 
+                      ? 'bg-white/10 backdrop-blur-sm text-white/90 border border-white/20' 
+                      : 'bg-surface text-charcoal border border-border'
+                  }`}
+                >
+                  {userInfo.name.split(' ')[0]}
                 </span>
               </li>
               <li>
-                <button 
+                <motion.button 
                   onClick={handleLogout} 
-                  className="logout-button"
-                  style={{
-                    ...linkStyle,
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
+                  className={`flex items-center gap-2 text-sm font-medium tracking-normal bg-transparent border-none py-2 px-3 rounded-lg transition-all duration-200 ${
+                    isTransparent ? 'text-white hover:bg-white/10' : 'text-ink hover:bg-cream'
+                  }`}
+                  whileTap={{ scale: 0.95 }}
                 >
+                  <LogoutIcon size={18} strokeWidth={1.5} color="currentColor" />
                   Logout
-                </button>
+                </motion.button>
               </li>
             </>
           ) : (
             <li>
-              <Link 
-                to="/login" 
-                style={{
-                  ...linkStyle,
-                  padding: '0.6rem 1.5rem',
-                  border: scrolled || !isHomePage ? '1.5px solid var(--text-primary)' : '1.5px solid rgba(250, 247, 242, 0.6)',
-                  borderRadius: 'var(--radius-sm)',
-                  transition: 'all 0.25s ease',
-                }}
-              >
-                Login
-              </Link>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link 
+                  to="/login" 
+                  className={`text-sm font-medium tracking-normal px-6 py-2.5 rounded-lg transition-all duration-300 no-underline ${
+                    isTransparent 
+                      ? 'border border-white/40 text-white hover:bg-white hover:text-ink hover:border-white' 
+                      : 'bg-ink text-white hover:bg-gold hover:shadow-soft'
+                  }`}
+                >
+                  Login
+                </Link>
+              </motion.div>
             </li>
           )}
         </ul>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className={`md:hidden bg-transparent border-none p-2.5 rounded-lg transition-colors ${
+            isTransparent ? 'text-white hover:bg-white/10' : 'text-ink hover:bg-cream'
+          }`}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          {mobileMenuOpen ? (
+            <XIcon size={24} strokeWidth={1.5} color="currentColor" />
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M3 12h18M3 6h18M3 18h18" />
+            </svg>
+          )}
+        </button>
       </nav>
-    </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            className="md:hidden overflow-hidden bg-white/95 backdrop-blur-xl mt-4 rounded-xl border border-border shadow-soft-lg"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <ul className="flex flex-col gap-1 p-4 list-none m-0">
+              {[
+                { to: '/shop', label: 'Shop' },
+                { to: '/about', label: 'About' },
+                { to: '/contact', label: 'Contact' },
+                { to: '/cart', label: `Cart ${cartItemCount > 0 ? `(${cartItemCount})` : ''}` },
+              ].map((link) => (
+                <li key={link.to}>
+                  <Link 
+                    to={link.to} 
+                    className={`text-base font-medium no-underline block py-3 px-4 rounded-lg transition-colors ${
+                      location.pathname === link.to 
+                        ? 'bg-cream text-ink' 
+                        : 'text-charcoal hover:bg-surface'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="border-t border-border mt-2 pt-2">
+                {userInfo ? (
+                  <button 
+                    onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                    className="w-full text-left text-base font-medium bg-transparent border-none py-3 px-4 rounded-lg text-ink hover:bg-surface transition-colors"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link 
+                    to="/login" 
+                    className="block text-center text-base font-medium px-6 py-3 rounded-lg bg-ink text-white no-underline hover:bg-gold transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

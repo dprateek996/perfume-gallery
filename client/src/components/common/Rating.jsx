@@ -1,40 +1,50 @@
 import React from 'react';
 
-const ratingStyle = {
-  color: '#f8e825', // A golden yellow for the stars
-  margin: '0.1rem',
-};
-
-const ratingTextStyle = {
-  fontSize: '0.9rem',
-  fontWeight: '600',
-  color: '#888',
-  marginLeft: '0.5rem',
-};
-
-
 const Rating = ({ value, text }) => {
+  const renderStar = (index) => {
+    const filled = value >= index;
+    const half = !filled && value >= index - 0.5;
+    
+    if (filled) {
+      return (
+        <svg className="w-4 h-4 text-gold fill-gold" viewBox="0 0 24 24">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      );
+    } else if (half) {
+      return (
+        <svg className="w-4 h-4 text-gold" viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id={`half-${index}`}>
+              <stop offset="50%" stopColor="#c9a66b" />
+              <stop offset="50%" stopColor="transparent" />
+            </linearGradient>
+          </defs>
+          <polygon 
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" 
+            fill={`url(#half-${index})`}
+            stroke="#c9a66b"
+            strokeWidth="1"
+          />
+        </svg>
+      );
+    } else {
+      return (
+        <svg className="w-4 h-4 text-sand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      );
+    }
+  };
+
   return (
-    <div className="rating">
-      <span style={ratingStyle}>
-        <i className={value >= 1 ? 'fas fa-star' : value >= 0.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
-      </span>
-      <span style={ratingStyle}>
-        <i className={value >= 2 ? 'fas fa-star' : value >= 1.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
-      </span>
-      <span style={ratingStyle}>
-        <i className={value >= 3 ? 'fas fa-star' : value >= 2.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
-      </span>
-      <span style={ratingStyle}>
-        <i className={value >= 4 ? 'fas fa-star' : value >= 3.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
-      </span>
-      <span style={ratingStyle}>
-        <i className={value >= 5 ? 'fas fa-star' : value >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
-      </span>
-      <span style={ratingTextStyle}>{text && text}</span>
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((index) => (
+        <span key={index}>{renderStar(index)}</span>
+      ))}
+      {text && <span className="text-sm text-stone ml-2">{text}</span>}
     </div>
   );
 };
 
-// This line is absolutely essential for the import to work.
 export default Rating;

@@ -19,8 +19,6 @@ import ProductDetailsPage from './pages/ProductDetailsPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import CartPage from './pages/CartPage.jsx';
-// We will create CartPage next, but we can import it now
-// import CartPage from './pages/CartPage.jsx'; 
 
 // Create the router configuration
 const router = createBrowserRouter([
