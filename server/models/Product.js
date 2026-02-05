@@ -14,6 +14,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  category: {
+    type: String,
+    enum: ['perfume', 'attar'],
+    default: 'perfume'
+  },
   price: {
     type: Number,
     required: true
@@ -27,7 +32,6 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 1
   },
-  // New fields for customer ratings
   rating: {
     type: Number,
     required: true,
@@ -39,9 +43,13 @@ const productSchema = new mongoose.Schema({
     default: 0,
   },
 }, {
-  // Automatically adds 'createdAt' and 'updatedAt' fields
   timestamps: true
 });
+
+productSchema.index({ category: 1 });
+productSchema.index({ name: 'text', description: 'text' });
+productSchema.index({ price: 1 });
+productSchema.index({ rating: -1 });
 
 const Product = mongoose.model('Product', productSchema);
 

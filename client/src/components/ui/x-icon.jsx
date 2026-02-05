@@ -8,7 +8,6 @@ const XIcon = forwardRef((
   const [scope, animate] = useAnimate();
 
   const start = useCallback(async () => {
-    // Rotate the X icon slightly and add a scale effect
     animate(".x-line-1", {
       rotate: 15,
       scale: 1.1,
@@ -65,9 +64,7 @@ const XIcon = forwardRef((
       onHoverStart={start}
       onHoverEnd={stop}>
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      {/* First line (top-left to bottom-right) */}
       <motion.path d="M18 6l-12 12" className="x-line-1" style={{ transformOrigin: "50%" }} />
-      {/* Second line (bottom-left to top-right) */}
       <motion.path d="M6 6l12 12" className="x-line-2" style={{ transformOrigin: "50%" }} />
     </motion.svg>
   );

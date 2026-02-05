@@ -8,7 +8,6 @@ const RosetteDiscountCheckIcon = forwardRef((
   const [scope, animate] = useAnimate();
 
   const start = useCallback(async () => {
-    // Rotate and scale the rosette badge
     animate(".rosette-badge", {
       rotate: [0, -5, 5, 0],
       scale: [1, 1.05, 1],
@@ -17,7 +16,6 @@ const RosetteDiscountCheckIcon = forwardRef((
       ease: "easeInOut",
     });
 
-    // Animate checkmark with path drawing
     await animate(".discount-check", {
       pathLength: [0, 1],
       opacity: [0, 1],
@@ -26,7 +24,6 @@ const RosetteDiscountCheckIcon = forwardRef((
       ease: "easeOut",
     });
 
-    // Bounce back effect
     animate(".rosette-badge", {
       scale: [1.05, 0.98, 1],
     }, {

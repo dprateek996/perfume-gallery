@@ -1,9 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-// 1. Create the context
 export const AuthContext = createContext(null);
 
-// 2. Create the provider component
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
 
@@ -24,9 +22,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('userInfo');
   };
 
-  // 3. Define the value to be provided
   const value = { userInfo, login, logout };
 
-  // 4. Return the Provider with the value
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

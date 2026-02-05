@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a1942;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d0a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5d470;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#d4a843;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c9922e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffe9a8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4a843;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="250" fill="url(#bg)" stroke="url(#gold)" stroke-width="6"/>
+  
+  <!-- Perfume bottle body -->
+  <path d="M180 200 
+           Q180 180 200 180 
+           L312 180 
+           Q332 180 332 200 
+           L346 380 
+           Q346 420 310 420 
+           L202 420 
+           Q166 420 166 380 
+           Z" 
+        fill="none" 
+        stroke="url(#gold)" 
+        stroke-width="12" 
+        stroke-linecap="round"/>
+  
+  <!-- Bottle neck -->
+  <rect x="228" y="145" width="56" height="40" rx="4" fill="url(#gold)"/>
+  
+  <!-- Bottle cap -->
+  <rect x="218" y="115" width="76" height="35" rx="8" fill="url(#goldShine)"/>
+  
+  <!-- Liquid inside bottle -->
+  <path d="M190 280 
+           Q210 260 256 270 
+           Q300 280 320 260 
+           L334 380 
+           Q334 408 304 408 
+           L208 408 
+           Q178 408 178 380 
+           Z" 
+        fill="url(#gold)" 
+        opacity="0.4"/>
+  
+  <!-- Spray mist particles -->
+  <circle cx="300" cy="90" r="4" fill="url(#gold)" opacity="0.8"/>
+  <circle cx="320" cy="75" r="5" fill="url(#gold)" opacity="0.6"/>
+  <circle cx="340" cy="85" r="3" fill="url(#gold)" opacity="0.7"/>
+  <circle cx="355" cy="70" r="4" fill="url(#gold)" opacity="0.5"/>
+  <circle cx="330" cy="55" r="3" fill="url(#gold)" opacity="0.4"/>
+  <circle cx="310" cy="60" r="2" fill="url(#gold)" opacity="0.6"/>
+  
+  <!-- Sparkle effect -->
+  <g fill="#ffe9a8" opacity="0.9">
+    <polygon points="370,150 375,160 385,165 375,170 370,180 365,170 355,165 365,160"/>
+    <polygon points="150,320 153,327 160,330 153,333 150,340 147,333 140,330 147,327" transform="scale(0.8) translate(30,50)"/>
+  </g>
+</svg>

@@ -42,15 +42,22 @@ const InstagramIcon = forwardRef((
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round">
-        <motion.path
+        <motion.rect
           className="ig-body"
           style={{ transformOrigin: "50%" }}
-          d="M4 8a4 4 0 1 -4h8a4 4v8a4 -4 4h-8a4 -4z" />
+          x="2"
+          y="2"
+          width="20"
+          height="20"
+          rx="5"
+          ry="5" />
 
-        <motion.path
+        <motion.circle
           className="ig-lens"
           style={{ transformOrigin: "50%" }}
-          d="M9 12a3 3 0 1 6 0a3 -6" />
+          cx="12"
+          cy="12"
+          r="4" />
 
         <motion.path className="ig-dot" d="M16.5 7.5v.01" />
       </svg>
