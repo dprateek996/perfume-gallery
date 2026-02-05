@@ -39,7 +39,7 @@ const ShieldCheck = forwardRef((
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
-      viewBox="0 24"
+      viewBox="0 0 24 24"
       fill="none"
       stroke={color}
       strokeWidth={strokeWidth}
@@ -50,10 +50,10 @@ const ShieldCheck = forwardRef((
       <motion.path
         className="shield-body"
         style={{ transformOrigin: "50%" }}
-        d="M11.46 20.846a12 12 0 1 -7.96 -14.846a12 8.5 -3a12 3a12 -.09 7.06" />
+        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
       <motion.path
         className="shield-check"
-        d="M15 19l2 2l4 -4"
+        d="M9 12l2 2 4-4"
         initial={{ pathLength: 1, opacity: 1 }} />
     </motion.svg>
   );

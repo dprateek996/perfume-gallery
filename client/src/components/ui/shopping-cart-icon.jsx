@@ -8,39 +8,24 @@ const ShoppingCartIcon = forwardRef((
   const [scope, animate] = useAnimate();
 
   const start = useCallback(async () => {
-    animate(".cart-upper", {
-      x: [0, 10, 0],
-    }, {
-      duration: 0.6,
-      ease: "easeInOut",
-    });
-    animate(".cart-wheel-left", {
-      rotate: [0, 180, 0],
-      x: [0, 10, 0],
-    }, {
-      duration: 0.6,
-      ease: "easeInOut",
-    });
-
-    animate(".cart-wheel-right", {
-      rotate: [0, 180, 0],
-      x: [0, 10, 0],
-    }, {
-      duration: 0.6,
-      ease: "easeInOut",
-    });
-    animate(".cart-item", {
-      y: [0, -2, 0],
+    animate(".cart-body", {
+      x: [0, 5, 0],
     }, {
       duration: 0.4,
+      ease: "easeInOut",
+    });
+    animate(".cart-wheel-left, .cart-wheel-right", {
+      rotate: [0, 180, 0],
+    }, {
+      duration: 0.5,
       ease: "easeInOut",
     });
   }, [animate]);
 
   const stop = useCallback(() => {
     animate(
-      ".cart-upper, .cart-wheel-left, .cart-wheel-right, .cart-item",
-      { x: 0, rotate: 0, y: 0 },
+      ".cart-body, .cart-wheel-left, .cart-wheel-right",
+      { x: 0, rotate: 0 },
       { duration: 0.2, ease: "easeInOut" }
     );
   }, [animate]);
@@ -60,33 +45,27 @@ const ShoppingCartIcon = forwardRef((
         xmlns="http://www.w3.org/2000/svg"
         width={size}
         height={size}
-        viewBox="0 48"
+        viewBox="0 0 24 24"
         fill="none"
         stroke={color}
         strokeWidth={strokeWidth}
-        strokeMiterlimit="10"
-        strokeLinecap="square">
+        strokeLinecap="round"
+        strokeLinejoin="round">
         <motion.path
-          className="cart-upper"
-          d="M8.49994 10H41L37.569 21.4367C36.9345 23.5517 34.9879 25 32.7798 25H10.4999" />
-
-        <motion.path
+          className="cart-body"
+          d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+        <motion.circle
           className="cart-wheel-left"
-          style={{ transformOrigin: "11px 41px" }}
-          d="M11 45C13.2091 45 15 43.2091 41C15 38.7909 13.2091 37 11 37C8.79086 7 41C7 8.79086 45Z" />
-
-        <motion.path
+          cx="9"
+          cy="21"
+          r="1"
+          style={{ transformOrigin: "9px 21px" }} />
+        <motion.circle
           className="cart-wheel-right"
-          style={{ transformOrigin: "37px 41px" }}
-          d="M37 45C39.2091 45 41 43.2091 41C41 38.7909 39.2091 37 37C34.7909 33 41C33 34.7909 45Z" />
-
-        <motion.path
-          className="cart-upper"
-          d="M41 32H9.46174C7.17727 32 6.08953 29.1885 7.77914 27.651L10.6923 25L7.81067 5.14103C7.63231 3.91188 6.57863 3.00005 5.33661 3.00003L3 3" />
-
-        <motion.path className="cart-item cart-upper" d="M30 16L30 19" />
-        <motion.path className="cart-item cart-upper" d="M24 16L24 19" />
-        <motion.path className="cart-item cart-upper" d="M18 16L18 19" />
+          cx="20"
+          cy="21"
+          r="1"
+          style={{ transformOrigin: "20px 21px" }} />
       </svg>
     </motion.div>
   );
