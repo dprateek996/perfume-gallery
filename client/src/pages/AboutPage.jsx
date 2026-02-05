@@ -36,7 +36,7 @@ const AboutPage = () => {
       content: [
         'We believe that a fragrance is a form of self-expression, a personal signature that tells a story without words. That is why we curate scents that are both modern and timeless—waiting to become a part of your own unique story.'
       ],
-      signature: '— Ammar Tariq, Founder'
+      signature: '— XX XXXX, Founder'
     }
   ];
 
@@ -44,7 +44,7 @@ const AboutPage = () => {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="pt-32 pb-20 px-8 text-center">
-        <motion.div 
+        <motion.div
           className="max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -57,8 +57,8 @@ const AboutPage = () => {
             Our Story
           </h1>
           <p className="text-lg md:text-xl text-charcoal leading-relaxed">
-            Born from a passion for the timeless art of perfumery, Perfume Gallery is more than just a shop—it 
-            is a journey into the soul of fragrance. We believe that every scent tells a story, evokes a memory, 
+            Born from a passion for the timeless art of perfumery, Perfume Gallery is more than just a shop—it
+            is a journey into the soul of fragrance. We believe that every scent tells a story, evokes a memory,
             and becomes a part of who you are.
           </p>
         </motion.div>
@@ -68,24 +68,23 @@ const AboutPage = () => {
       <div className="pb-24 px-8">
         <div className="max-w-7xl mx-auto space-y-32">
           {sections.map((section, index) => (
-            <motion.div 
+            <motion.div
               key={index}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
-                section.reverse ? 'lg:flex-row-reverse' : ''
-              }`}
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${section.reverse ? 'lg:flex-row-reverse' : ''
+                }`}
               {...fadeInUp}
             >
               <div className={`relative ${section.reverse ? 'lg:order-2' : ''}`}>
                 <div className="aspect-[4/5] rounded-lg overflow-hidden">
-                  <img 
-                    src={section.image} 
+                  <img
+                    src={section.image}
                     alt={section.alt}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className={`absolute -bottom-8 ${section.reverse ? '-left-8' : '-right-8'} w-32 h-32 bg-gold/10 rounded-lg -z-10`}></div>
               </div>
-              
+
               <div className={`space-y-6 ${section.reverse ? 'lg:order-1' : ''}`}>
                 <h2 className="font-heading text-3xl md:text-4xl font-normal text-ink tracking-tight">
                   {section.title}
@@ -107,7 +106,7 @@ const AboutPage = () => {
       </div>
 
       {/* Values Section */}
-      <motion.section 
+      <motion.section
         className="py-24 px-8 bg-cream border-y border-border"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -121,14 +120,14 @@ const AboutPage = () => {
             </h2>
             <p className="text-lg text-stone">The principles that guide everything we do</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { title: 'Authenticity', desc: 'Every fragrance is 100% genuine, sourced directly from trusted master perfumers.' },
               { title: 'Craftsmanship', desc: 'We celebrate the artisans who pour their passion into every bottle they create.' },
               { title: 'Sustainability', desc: 'We prioritize ethically-sourced ingredients and eco-conscious packaging.' },
             ].map((value, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className="text-center space-y-4"
                 initial={{ opacity: 0, y: 20 }}
